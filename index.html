@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="xmlToJSON-master/lib/xmlToJSON.js"
+    ></script>
+    <script>
+      // lista de moedas
+      const getMoedas = async () => {
+        const url = "https://economia.awesomeapi.com.br/xml/available/uniq";
+
+        const data = await fetch(url);
+        const result = await data.text();
+        const toJson = xmlToJSON.parseString(result);
+        console.log({ array: toJson.xml[0] });
+      };
+
+      const getCombinacoes = async () => {
+        const url = "https://economia.awesomeapi.com.br/xml/available";
+
+        const data = await fetch(url);
+        const result = await data.text();
+        const toJson = xmlToJSON.parseString(result);
+
+        console.log(toJson.xml[0]['BRL-AED'][0]._text)
+
+
+        for(const $moeda in toJson.xml[0]) {
+            // console.log($moeda)
+        }
+    };
+
+      getCombinacoes()
+    </script>
+  </body>
+</html>
